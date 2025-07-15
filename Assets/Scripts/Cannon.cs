@@ -6,6 +6,8 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     public GameObject cannonball;
+    public float speed;
+    public Color cannonballColour;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,11 @@ public class Cannon : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Instantiate(cannonball, transform.position, Quaternion.identity);
+            GameObject spawnedCannonball = Instantiate(cannonball, transform.position, Quaternion.identity);
+            SpriteRenderer cannonballRenderer = spawnedCannonball.GetComponent<SpriteRenderer>();
+
+            Cannonball cannonballScript = spawnedCannonball.GetComponent<Cannonball>();
+            cannonballScript.moveDuration = speed;
         }
     }
 
