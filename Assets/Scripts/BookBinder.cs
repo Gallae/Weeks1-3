@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class BookBinder : MonoBehaviour
 {
-    private float moveTimer = 5;
+    private float moveTimer = 9;
     private float resetTimer = 1;
     public float moveSpeed;
+    private bool atBottomOfTravel = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,17 +22,18 @@ public class BookBinder : MonoBehaviour
         {
             moveTimer -= Time.deltaTime;
         }
-        if (moveTimer <= 0 && transform.position.y > -4.69)
+        if (moveTimer <= 0 && transform.position.y >= -0.43 && !atBottomOfTravel)
         {  
             moveTimer = 0;
             Vector3 newPos = transform.position + Vector3.down * moveSpeed * Time.deltaTime;
             transform.position = newPos;
         }
-        if (transform.position.y <= -4.69)
+        if (transform.position.y <= -0.43)
         {
             resetTimer -= Time.deltaTime;
+            atBottomOfTravel = true;
         }
-        if (resetTimer <= 0 && transform.position.y < -2.07)
+        if (resetTimer <= 0 && transform.position.y <= 2.26)
         { 
             resetTimer = 0;
             Vector3 newPos = transform.position + Vector3.up * (moveSpeed / 3) * Time.deltaTime;
