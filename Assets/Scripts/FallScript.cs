@@ -9,6 +9,7 @@ public class FallScript : MonoBehaviour
     public float fallTimer;
     public float moveTimer;
     private float killTimer = 1.5f;
+   
 
     void Start()
     {
