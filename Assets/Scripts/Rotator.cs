@@ -18,31 +18,35 @@ public class Rotator : MonoBehaviour
 
     void Update()
     {
-        //actions lined up with movement of other objects in scene
-        if (fallTimer >= 0)
+        if (Input.GetKey(KeyCode.Space))
         {
-            fallTimer -= Time.deltaTime;
+            //actions lined up with movement of other objects in scene
+            if (fallTimer >= 0)
+            {
+                fallTimer -= Time.deltaTime;
+            }
+            if (fallTimer < 0)
+            {
+                fallTimer = 0;
+                moveTimer = 3;
+            }
+            if (moveTimer >= 0)
+            {
+                moveTimer -= Time.deltaTime;
+                currentRotation += new Vector3(0, 0, -75) * Time.deltaTime;
+                transform.eulerAngles = currentRotation;
+                stopTimer = 2;
+            }
+            if (stopTimer > 0)
+            {
+                stopTimer -= Time.deltaTime;
+            }
+            if (stopTimer <= 0)
+            {
+                stopTimer = 0;
+                currentRotation = transform.eulerAngles;
+            }
         }
-        if (fallTimer < 0)
-        {
-            fallTimer = 0;
-            moveTimer = 3;
-        }
-        if (moveTimer >= 0)
-        {
-            moveTimer -= Time.deltaTime;
-            currentRotation += new Vector3(0, 0, -75) * Time.deltaTime;
-            transform.eulerAngles = currentRotation;
-            stopTimer = 2;
-        }
-        if (stopTimer > 0)
-        {
-            stopTimer -= Time.deltaTime;
-        }
-        if (stopTimer <=0)
-        {
-            stopTimer = 0;
-            currentRotation = transform.eulerAngles;
-        }
+
     }
 }
